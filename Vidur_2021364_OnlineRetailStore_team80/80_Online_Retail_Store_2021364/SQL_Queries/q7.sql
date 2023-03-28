@@ -1,0 +1,5 @@
+select Online_Retail_Store.orders.delivery_boy_id,Online_Retail_Store.orders.order_placed_date,Online_Retail_Store.orders.order_status,Online_Retail_Store.delivery_boy.delivery_boy_name,Online_Retail_Store.delivery_boy.delivery_boy_average_rating
+from Online_Retail_Store.orders
+left join Online_Retail_Store.delivery_boy
+on Online_Retail_Store.orders.delivery_boy_id = Online_Retail_Store.delivery_boy.delivery_boy_id
+where Online_Retail_Store.orders.total_cost>=190.05
