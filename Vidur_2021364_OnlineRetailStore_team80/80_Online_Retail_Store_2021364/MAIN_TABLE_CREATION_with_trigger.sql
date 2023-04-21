@@ -20,7 +20,7 @@ create table admins (
 );
 
 insert into admins (admin_id, admin_name, admin_username, admin_password)
-VALUES (1, 'Tedmund Freeman', 'Padge1', 'gF8vLd'),
+VALUES (1, 'Tedmund Freeman', 'Vidur', '1234'),
 (2, 'Kellen Banger', 'Mure2', 'JQf9tTo17UYa'),
 (3, 'Olive Avramovic', 'Amabel3', 'BnAIgl'),
 (4, 'Rabbi Staunton', 'Gennifer4', 'mXmOrhRfUa6'),
@@ -345,6 +345,10 @@ insert into category (category_id, category_name, category_info, admin_id) value
  (98, 'Navigator', 2008,98),
  (99, 'Sierra 2500', 2000,99),
  (100, 'Tahoe', 199,100);
+ 
+ DELETE FROM category WHERE category_id=20;
+ insert into category (category_name, category_info, admin_id) values 
+ ('VFX', 2008,20);
 
 create table delivery_boy (
 	delivery_boy_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -462,7 +466,7 @@ insert into delivery_boy (delivery_boy_id, delivery_boy_name, delivery_boy_usern
 
 create table product (
 	product_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	product_name VARCHAR(50) NOT NULL,
+	product_name VARCHAR(50) NOT NULL UNIQUE,
 	product_cost DECIMAL(10, 2) NOT NULL,
 	Brand_name VARCHAR(50) NOT NULL,
 	Quantity INT,
@@ -471,79 +475,79 @@ create table product (
     ON DELETE CASCADE
 );
 insert into product (product_id, product_name, product_cost, Brand_name, Quantity, admin_id) values 
- (1, 'Pork - Ground', '789.20', 'Famotidine', 56, 1),
- (2, 'Table Cloth - 53x69 Colour', '197.00', 'Tasigna', 371, 12),
- (3, 'Syrup - Chocolate', '738.95', 'ANTI-BACTERIAL HAND ', 644, 3),
- (4, 'Napkin Colour', '463.69', 'Alpet E2 Sanitizing Foam Soap', 635, 4),
- (5, 'Champagne - Brights, Dry', '230.63', 'R-044 Blemish Fix', 233, 5),
- (6, 'Pineapple - Golden', '334.28', 'Loneliness and Sadness', 953, 6),
- (7, 'Bagel - Ched Chs Presliced', '848.49', 'Hyoscyamine Sulfate', 533, 7),
- (8, 'Wine - Clavet Saint Emilion', '398.14', 'PENTOXIFYLLINE', 374, 8),
- (9, 'Veal - Insides, Grains', '837.09', 'Business Elite Amenity', 150, 19),
- (10, 'Onions - Pearl', '511.35', 'OCELLA', 235, 100),
- (11, 'Port - 74 Brights', '990.62', 'Gas Relief', 208, 19),
- (12, 'Couscous', '47.38', 'Ferrlecit', 656, 12),
- (13, 'Cup - Paper 10oz 92959', '157.13', 'LBEL HYDRATESS', 818, 19),
- (14, 'Pepper - Red, Finger Hot', '393.97', 'Inderal', 405, 14),
- (15, 'Bagelers', '418.50', 'risperidone', 255, 15),
- (16, 'Pork - Inside', '848.88', 'Hand Sanitizer', 218, 16),
- (17, 'Chicken Breast Halal', '639.63', 'VP-GGR-B6', 221, 17),
- (18, 'Curry Paste - Green Masala', '4.51', 'PRAMIPEXOLE DIHYDROCHLORIDE', 523, 18),
- (19, 'Oregano - Fresh', '23.54', 'OXYCODONE AND ACETAMINOPHEN', 869, 19),
- (20, 'Wine - Taylors Reserve', '800.73', 'DOUBLE WEAR ALL DAY', 607, 20),
- (21, 'Shrimp - Prawn', '355.17', 'Gas Relief', 727, 21),
- (22, 'Cup - 4oz Translucent', '675.28', 'Food - Plant Source, Yeast', 303, 22),
- (23, 'Rolled Oats', '745.75', 'moxifloxacin hydrochloride', 491, 23),
- (24, 'Cheese - Havarti, Salsa', '389.52', 'Lidocaine Hydrochloride', 270, 24),
- (25, 'Beef - Inside Round', '400.47', 'Hand Essentials Skin Repair', 188, 25),
- (26, 'Spice - Montreal Steak Spice', '774.37', 'LBEL EFFET PARFAIT Spots Reducing', 222, 26),
- (27, 'Bread - Raisin Walnut Pull', '118.54', 'Loratadine', 50, 27),
- (28, 'Hand Towel', '189.93', 'Flexall Pain Relieving', 39, 28),
- (29, 'Cookie Dough - Chunky', '172.07', 'Charm-Tex', 451, 29),
- (30, 'Beef - Tenderloin Tails', '927.88', 'Bupropion Hydrochloride', 587, 30),
- (31, 'Compound - Pear', '338.87', 'Rugby Aspirin', 928, 31),
- (32, 'Wine - Red, Mouton Cadet', '931.33', 'Activator Light', 348, 32),
- (33, 'Lettuce Romaine Chopped', '955.55', 'Glo Science', 266, 33),
- (34, 'Cookie - Oreo 100x2', '520.68', 'Hyoscyamine Sulfate', 912, 34),
- (35, 'Soup Campbells - Tomato Bisque', '832.80', 'Amoxicillin', 692, 35),
- (36, 'Yams', '596.58', 'Diamox Sequels', 106, 36),
- (37, 'Beer - Guiness', '380.79', 'equaline nighttime cold and flu relief', 892, 37),
- (38, 'Soup - Campbells - Chicken Noodle', '146.47', 'equate nitetime', 812, 38),
- (39, 'Lobster - Tail, 3 - 4 Oz', '125.77', 'Baby Wipes with Allantoin', 775, 39),
- (40, 'Langers - Cranberry Cocktail', '434.70', 'SHISEIDO THE MAKEUP', 339, 40),
- (41, 'Coffee - Ristretto Coffee Capsule', '995.38', 'Mucus-Clear', 420, 41),
- (42, 'Wine - Crozes Hermitage E.', '227.84', 'Topcare Lubricating Plus', 786, 42),
- (43, 'Pate Pans Yellow', '838.92', 'Diltiazem Hydrochloride', 638, 43),
- (44, 'Tomatoes - Roma', '176.52', 'Amlodipine Besylate', 683, 44),
- (45, 'Clam Nectar', '84.07', 'Amantadine Hydrochloride', 946, 45),
- (46, 'Pasta - Detalini, White, Fresh', '435.91', 'Amlodipine Besylate', 167, 46),
- (47, 'Longos - Chicken Curried', '793.63', 'Sleep Aid', 19, 47),
- (48, 'Lamb Shoulder Boneless Nz', '355.21', 'Childrens Acetaminophen', 762, 48),
- (49, 'Pork - Belly Fresh', '263.42', 'Pollens - Weeds and Garden Plants', 542, 49),
- (50, 'Juice - Mango', '746.63', 'Lumene Bright Now Vitamin C Day SPF 15', 383, 50),
- (51, 'Caviar - Salmon', '670.88', 'Dual Senses Scalp Regulation AntiDandruff Shampoo', 361, 51),
- (52, 'Wasabi Paste', '137.96', 'Hydrocodone Bitartrate and Acetaminophen', 618, 52),
- (53, 'Propel Sport Drink', '690.21', 'SINGULAIR', 835, 53),
- (54, 'Instant Coffee', '768.84', 'GOOD NEIGHBOR PHARMACY CAPSAICIN', 986, 54),
- (55, 'Trout - Rainbow, Frozen', '355.28', 'Lumene Bright Now Vitamin C BB', 9, 55),
- (56, 'Apricots Fresh', '826.63', 'ibuprofen', 910, 56),
- (57, 'Cheese - Brie Roitelet', '500.38', 'Night time', 520, 57),
- (58, 'Apple - Granny Smith', '576.25', 'careone mucus relief', 786, 58),
- (59, 'Shrimp - 100 / 200 Cold Water', '580.25', 'VANOXIDE', 273, 59),
- (60, 'Seedlings - Clamshell', '435.14', 'Lidocaine Hydrochloride and Epinephrine', 244, 60),
- (61, 'Puree - Blackcurrant', '677.55', 'TobraDex', 217, 61),
- (62, 'Fish - Artic Char, Cold Smoked', '256.80', 'DOUBLE WEAR', 222, 62),
+ (1, 'Pork - Ground', 789.20, 'Famotidine', 1156, 1),
+ (2, 'Table Cloth - 53x69 Colour', '197.00', 'Tasigna', 1371, 12),
+ (3, 'Syrup - Chocolate', '738.95', 'ANTI-BACTERIAL HAND ', 1644, 3),
+ (4, 'Napkin Colour Black', '463.69', 'Alpet E2 Sanitizing Foam Soap', 1635, 4),
+ (5, 'Champagne - Brights, Dry', '230.63', 'R-044 Blemish Fix', 1233, 5),
+ (6, 'Pineapple - Golden', '334.28', 'Loneliness and Sadness', 1953, 6),
+ (7, 'Bagel - Ched Chs Presliced', '848.49', 'Hyoscyamine Sulfate', 1533, 7),
+ (8, 'Wine - Clavet Saint Emilion', '398.14', 'PENTOXIFYLLINE', 1374, 8),
+ (9, 'Veal - Insides, Grains', '837.09', 'Business Elite Amenity', 1150, 19),
+ (10, 'Onions - Pearl', '511.35', 'OCELLA', 2135, 100),
+ (11, 'Port - 74 Brights', '990.62', 'Gas Relief', 2108, 19),
+ (12, 'Couscous', '47.38', 'Ferrlecit', 6156, 12),
+ (13, 'Cup - Paper 10oz 92959', '157.13', 'LBEL HYDRATESS', 1818, 19),
+ (14, 'Pepper - Red, Finger Hot', '393.97', 'Inderal', 4051, 14),
+ (15, 'Bagelers', '418.50', 'risperidone', 1255, 15),
+ (16, 'Pork - Inside', '848.88', 'Hand Sanitizer', 1218, 16),
+ (17, 'Chicken Breast Halal Prem', '639.63', 'VP-GGR-B6', 1221, 17),
+ (18, 'Curry Paste - Green Masala', '4.51', 'PRAMIPEXOLE DIHYDROCHLORIDE', 1523, 18),
+ (19, 'Oregano - Fresh', '23.54', 'OXYCODONE AND ACETAMINOPHEN', 1869, 19),
+ (20, 'Wine - Taylors Reserve', '800.73', 'DOUBLE WEAR ALL DAY', 1607, 20),
+ (21, 'Shrimp - Prawn', '355.17', 'Gas Relief', 1727, 21),
+ (22, 'Cup - 4oz Translucent', '675.28', 'Food - Plant Source, Yeast', 1303, 22),
+ (23, 'Rolled Oats', '745.75', 'moxifloxacin hydrochloride', 1491, 23),
+ (24, 'Cheese - Havarti, Salsa', '389.52', 'Lidocaine Hydrochloride', 1270, 24),
+ (25, 'Beef - Inside Round', '400.47', 'Hand Essentials Skin Repair', 1188, 25),
+ (26, 'Spice - Montreal Steak Spice', '774.37', 'LBEL EFFET PARFAIT Spots Reducing', 1222, 26),
+ (27, 'Bread - Raisin Walnut Pull', '118.54', 'Loratadine', 1150, 27),
+ (28, 'Hand Towel', '189.93', 'Flexall Pain Relieving', 1139, 28),
+ (29, 'Cookie Dough - Chunky', '172.07', 'Charm-Tex', 4251, 29),
+ (30, 'Beef - Tenderloin Tails', '927.88', 'Bupropion Hydrochloride', 5837, 30),
+ (31, 'Compound - Pear', '338.87', 'Rugby Aspirin', 9281, 31),
+ (32, 'Wine - Red, Mouton Cadet', '931.33', 'Activator Light', 3418, 32),
+ (33, 'Lettuce Romaine Chopped Sliced', '955.55', 'Glo Science', 2166, 33),
+ (34, 'Cookie - Oreo 100x2', '520.68', 'Hyoscyamine Sulfate', 9112, 34),
+ (35, 'Soup Campbells - Tomato Bisque', '832.80', 'Amoxicillin', 6192, 35),
+ (36, 'Yams', '596.58', 'Diamox Sequels', 1106, 36),
+ (37, 'Beer - Guiness', '380.79', 'equaline nighttime cold and flu relief', 1892, 37),
+ (38, 'Soup - Campbells - Chicken Noodle', '146.47', 'equate nitetime', 1812, 38),
+ (39, 'Lobster - Tail, 3 - 4 Oz', '125.77', 'Baby Wipes with Allantoin', 1775, 39),
+ (40, 'Langers - Cranberry Cocktail', '434.70', 'SHISEIDO THE MAKEUP', 1339, 40),
+ (41, 'Coffee - Ristretto Coffee Capsule', '995.38', 'Mucus-Clear', 1420, 41),
+ (42, 'Wine - Crozes Hermitage E.', '227.84', 'Topcare Lubricating Plus', 1786, 42),
+ (43, 'Pate Pans Yellow', '838.92', 'Diltiazem Hydrochloride', 1638, 43),
+ (44, 'Tomatoes - Roma', '176.52', 'Amlodipine Besylate', 1683, 44),
+ (45, 'Clam Nectar', '84.07', 'Amantadine Hydrochloride', 1946, 45),
+ (46, 'Pasta - Detalini, White, Fresh', '435.91', 'Amlodipine Besylate', 1167, 46),
+ (47, 'Longos - Chicken Curried', '793.63', 'Sleep Aid', 1119, 47),
+ (48, 'Lamb Shoulder Boneless Nz', '355.21', 'Childrens Acetaminophen', 11762, 48),
+ (49, 'Pork - Belly Fresh', '263.42', 'Pollens - Weeds and Garden Plants', 1542, 49),
+ (50, 'Juice - Mango', '746.63', 'Lumene Bright Now Vitamin C Day SPF 15', 1383, 50),
+ (51, 'Caviar - Salmon', '670.88', 'Dual Senses Scalp Regulation AntiDandruff Shampoo', 1361, 51),
+ (52, 'Wasabi Paste Mayo', '137.96', 'Hydrocodone Bitartrate and Acetaminophen', 1618, 52),
+ (53, 'Propel Sport Drink', '690.21', 'SINGULAIR',1835, 53),
+ (54, 'Instant Coffee', '768.84', 'GOOD NEIGHBOR PHARMACY CAPSAICIN', 1986, 54),
+ (55, 'Trout - Rainbow, Frozen', '355.28', 'Lumene Bright Now Vitamin C BB', 1119, 55),
+ (56, 'Apricots Fresh', '826.63', 'ibuprofen', 1910, 56),
+ (57, 'Cheese - Brie Roitelet', '500.38', 'Night time', 5120, 57),
+ (58, 'Apple - Granny Smith', '576.25', 'careone mucus relief', 1786, 58),
+ (59, 'Shrimp - 100 / 200 Cold Water', '580.25', 'VANOXIDE', 1273, 59),
+ (60, 'Seedlings - Clamshell', '435.14', 'Lidocaine Hydrochloride and Epinephrine', 1244, 60),
+ (61, 'Puree - Blackcurrant', '677.55', 'TobraDex', 1217, 61),
+ (62, 'Fish - Artic Char, Cold Smoked', '256.80', 'DOUBLE WEAR', 1222, 62),
  (63, 'Napkin - Beverge, White 2 - Ply', '197.35', 'STOOL SOFTENER DOCUSATE SODIUM 50 MG', 534, 63),
  (64, 'Water - Spring Water, 355 Ml', '985.62', 'EXTRA STRENGTH STOOL SOFTENER', 410, 64),
- (65, 'Cornflakes', '164.43', '24-Hour All Day Allergy', 876, 65),
- (66, 'Tomato Paste', '730.10', 'Metoprolol Tartrate', 693, 66),
- (67, 'Crackers - Trio', '990.73', 'VANICREAM', 136, 67),
- (68, 'Huck Towels White', '151.85', 'Famotidine', 811, 68),
- (69, 'Mushroom - Morel Frozen', '557.13', 'METFORMIN HYDROCHLORIDE', 706, 69),
- (70, 'Island Oasis - Sweet And Sour Mix', '641.50', 'Lithium Carbonate', 2, 70),
+ (65, 'Cornflakes', '164.43', '24-Hour All Day Allergy', 1876, 65),
+ (66, 'Tomato Paste', '730.10', 'Metoprolol Tartrate', 1693, 66),
+ (67, 'Crackers - Trio', '990.73', 'VANICREAM', 1136, 67),
+ (68, 'Huck Towels White', '151.85', 'Famotidine', 1811, 68),
+ (69, 'Mushroom - Morel Frozen', '557.13', 'METFORMIN HYDROCHLORIDE', 1706, 69),
+ (70, 'Island Oasis - Sweet And Sour Mix', '641.50', 'Lithium Carbonate', 112, 70),
  (71, 'Peas - Pigeon, Dry', '57.12', 'Duloxetine', 124, 71),
  (72, 'Raisin - Dark', '581.15', 'Aurum Stibium Hyoscyamus', 551, 72),
- (73, 'Juice - Prune', '109.48', 'AVAPTA', 212, 73),
+ (73, 'Juice - Prune Dark', '109.48', 'AVAPTA', 212, 73),
  (74, 'Pepper - Yellow Bell', '408.35', 'Zeel', 351, 74),
  (75, 'Muffin Batt - Blueberry Passion', '444.38', 'ENALAPRIL MALEATE', 345, 75),
  (76, 'Muffin Mix - Morning Glory', '607.69', 'Olanzapine and Fluoxetine', 978, 76),
@@ -569,7 +573,7 @@ insert into product (product_id, product_name, product_cost, Brand_name, Quantit
  (96, 'Dr. Pepper - 355ml', '85.99', 'Trilipix', 316, 96),
  (97, 'Gherkin - Sour', '582.31', 'Gentamicin Sulfate', 102, 97),
  (98, 'Wasabi Paste', '929.77', 'Candida - Yeast', 493, 98),
- (99, 'Juice - Prune', '98.97', 'Laura Lynn Extra Whitening Sensitive', 8, 99),
+ (99, 'Juice - Prune', 98.90, 'Laura Lynn Extra Whitening Sensitive', 8, 99),
  (100, 'Tomatoes Tear Drop', '446.62', 'Bumetanide', 978, 100);
  
 create table dealer (
@@ -584,6 +588,17 @@ create table dealer (
     FOREIGN KEY (admin_id) REFERENCES admins (admin_id)
     ON DELETE CASCADE
 );
+
+delimiter //
+CREATE TRIGGER DEALER_check_insert_trigger BEFORE INSERT ON dealer
+       FOR EACH ROW
+       BEGIN
+           IF NEW.address_of_operations = '' THEN
+               SET NEW.address_of_operations = 'Vidur Limited';
+           END IF;
+       END;//
+delimiter ;
+
 insert into dealer (dealer_id, dealer_name, dealer_username, dealer_password, address_of_operations, contact_number, email_id, admin_id) values 
  (1, 'Worth Durram', 'Gregor Hitzke', 'RlrrP9kFY8kJ', '153rd floor', '334 909 6851', 'ghitzke0@blog.com', 1),
  (2, 'Josselyn Le Monnier', 'Letti Middleweek', 'owWcTp6zhR', '10th Floor', '670 796 7888', 'lmiddleweek1@t-online.de', 2),
@@ -687,7 +702,7 @@ insert into dealer (dealer_id, dealer_name, dealer_username, dealer_password, ad
  (100, 'Boyce Giraudel', 'Rosabelle Frankowski', 'E61QLporFH4y', 'Room 1260', '319 307 8643', 'rfrankowski2r@yale.edu', 100);
  
 create table product_feedback (
-	feedback_id INT NOT NULL UNIQUE,
+	feedback_id INT NOT NULL UNIQUE AUTO_INCREMENT,
 	rating_given DECIMAL(3,2) NOT NULL,
 	review TEXT NOT NULL,
 	likes INT,
@@ -804,233 +819,144 @@ insert into product_feedback (feedback_id, rating_given, review, likes, date_pub
  
 create table coupon (
 	coupon_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	coupon_expiry_date DATE NOT NULL,
-	minimum_order_value DECIMAL(10, 2) NOT NULL,
 	percentage_discount INT NOT NULL,
-	maximum_discount DECIMAL(10, 2) NOT NULL,
-	terms_and_conditions TEXT NOT NULL,
 	coupon_code VARCHAR(50) NOT NULL UNIQUE,
     admin_id INT NOT NULL,
     FOREIGN KEY (admin_id) REFERENCES admins (admin_id)
-    ON DELETE CASCADE,
-    customer_id INT NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customer (customer_id)
     ON DELETE CASCADE
 );
 
-insert into coupon (coupon_id, coupon_expiry_date, minimum_order_value, percentage_discount, maximum_discount, terms_and_conditions, coupon_code, admin_id, customer_id) values 
- (1, '2022-02-15', '558.45', 23, '345.50', 'nulla ut erat id mauris vulputate elementum nullam', 'vsGzoRI0w', 1, 1),
- (2, '2022-03-19', '475.78', 21, '274.89', 'hac habitasse platea dictumst maecenas ut', 'N8Yr78', 2, 2),
- (3, '2022-03-06', '262.37', 48, '115.82', 'potenti cras in purus eu magna', 'QOoIW6Ebt', 3, 3),
- (4, '2022-06-11', '828.01', 71, '245.89', 'justo lacinia eget', 'fuEPbl0OSOP', 4, 4),
- (5, '2022-03-20', '990.43', 16, '172.01', 'eget tincidunt eget tempus vel', 'dT7a6y6Gozh', 5, 5),
- (6, '2022-10-24', '796.70', 37, '309.53', 'erat quisque erat', 'RhjeHhc5i', 6, 6),
- (7, '2022-07-29', '521.60', 59, '231.04', 'tempor turpis nec euismod scelerisque', 'aEXdbz060', 7, 7),
- (8, '2022-04-12', '658.99', 53, '105.15', 'metus vitae ipsum aliquam', 'wqeMJJE9ZWBK', 8, 8),
- (9, '2022-07-27', '230.47', 40, '216.65', 'pharetra magna vestibulum aliquet ultrices', 'N6b3tTZ5', 9, 9),
- (10, '2022-04-28', '552.06', 38, '302.38', 'felis eu sapien cursus vestibulum proin eu mi', 'BAdPBiD6Ne', 10, 10),
- (11, '2022-02-14', '503.24', 27, '360.00', 'accumsan tellus nisi eu orci mauris lacinia', 'dtd3d5', 11, 11),
- (12, '2023-01-08', '767.49', 26, '198.94', 'leo rhoncus sed vestibulum sit amet cursus', 'e2EWt3', 12, 12),
- (13, '2022-08-06', '483.55', 10, '236.42', 'ac lobortis vel dapibus at diam nam tristique', 'yY90ZxLSVxAn', 13, 13),
- (14, '2022-09-04', '225.57', 63, '180.64', 'quisque porta volutpat', 'ryk1QQnP66Y', 14, 14),
- (15, '2022-06-25', '937.48', 45, '334.03', 'luctus et ultrices posuere cubilia curae mauris', 'PEnNG21Pms', 15, 15),
- (16, '2022-03-21', '792.97', 26, '172.30', 'cursus urna ut tellus nulla', 'u36vJnI', 16, 16),
- (17, '2022-08-17', '399.36', 36, '197.24', 'tincidunt eget tempus vel pede morbi porttitor lorem', '4VUB4O3W8M', 17, 17),
- (18, '2022-10-10', '207.59', 43, '194.43', 'ut ultrices vel augue vestibulum ante ipsum primis', 'wVbt2c', 18, 18),
- (19, '2022-03-31', '418.81', 32, '248.88', 'sapien placerat ante nulla justo aliquam quis', 'rIeTMhqpi5T4', 19, 19),
- (20, '2022-11-27', '771.90', 32, '309.57', 'nunc nisl duis bibendum felis sed interdum', 'xeyOeYUfhq', 20, 20),
- (21, '2022-08-19', '362.41', 72, '112.86', 'pretium nisl ut volutpat sapien arcu sed augue', 'zYQsGDujJPFD', 21, 21),
- (22, '2022-07-26', '733.59', 34, '219.24', 'quam pharetra magna ac consequat metus sapien ut', 'qFJBUzCZ1E', 22, 22),
- (23, '2023-01-07', '837.85', 41, '278.37', 'mi in porttitor pede justo eu massa', 'KXyffQXc', 23, 23),
- (24, '2022-05-02', '368.11', 55, '231.56', 'luctus et ultrices posuere', 'DkOrQ0', 24, 24),
- (25, '2022-09-05', '819.20', 13, '139.63', 'lectus in quam fringilla rhoncus mauris enim leo', 'n5at2GK', 25, 25),
- (26, '2023-01-07', '829.80', 60, '337.81', 'tempus semper est', 'ZZyiVD', 26, 26),
- (27, '2022-11-10', '216.62', 52, '231.63', 'luctus et ultrices posuere cubilia curae nulla dapibus', '7nqEzYhu', 27, 27),
- (28, '2023-01-21', '461.22', 64, '269.03', 'pellentesque volutpat dui maecenas tristique est et', 'mJXa14A7', 28, 28),
- (29, '2022-11-20', '897.18', 49, '387.19', 'maecenas pulvinar lobortis est phasellus sit amet', 'wRU2tYTTS4m', 29, 29),
- (30, '2022-10-01', '206.77', 51, '350.17', 'erat tortor sollicitudin mi sit amet', 'scJyYlCT', 30, 30),
- (31, '2022-04-13', '596.22', 33, '315.39', 'vehicula condimentum curabitur in libero ut', 'f9CqE99Wn2e', 31, 31),
- (32, '2022-03-26', '459.19', 28, '278.59', 'ut nunc vestibulum ante ipsum', 'ssUFyW8S', 32, 32),
- (33, '2022-11-09', '765.84', 49, '231.02', 'in sapien iaculis congue vivamus metus arcu adipiscing', 'CJf3RXqp', 33, 33),
- (34, '2022-12-24', '444.88', 46, '187.54', 'tristique est et tempus semper est quam', 'LGkPe2', 34, 34),
- (35, '2022-06-23', '242.28', 42, '178.07', 'sit amet sem fusce consequat nulla nisl nunc', 'tUH7RS9Yt3fj', 35, 35),
- (36, '2022-08-14', '552.21', 19, '289.13', 'augue vestibulum rutrum rutrum neque aenean auctor gravida', 'pI0aVSl', 36, 36),
- (37, '2022-06-05', '774.08', 13, '109.40', 'ultrices posuere cubilia curae duis faucibus accumsan', 'E6zsrfTH', 37, 37),
- (38, '2022-04-08', '983.45', 61, '159.96', 'augue quam sollicitudin vitae consectetuer eget rutrum at', '78TZjMq', 38, 38),
- (39, '2022-06-17', '573.25', 44, '397.20', 'est donec odio justo', 'GjTQTAKFI2F', 39, 39),
- (40, '2022-07-12', '754.71', 42, '260.76', 'vulputate nonummy maecenas tincidunt lacus at', '6U7dXqpX', 40, 40),
- (41, '2022-12-03', '797.20', 32, '330.15', 'primis in faucibus orci luctus et ultrices', 'SyACw44', 41, 41),
- (42, '2022-10-17', '578.85', 67, '187.34', 'consectetuer eget rutrum at', 'lXgEmHGV2', 42, 42),
- (43, '2023-01-05', '923.60', 25, '139.08', 'vivamus metus arcu', 'JW1XKxZA', 43, 43),
- (44, '2023-01-26', '990.30', 46, '287.52', 'rhoncus aliquet pulvinar', 'z9ZDF13', 44, 44),
- (45, '2022-08-12', '618.43', 55, '177.68', 'posuere metus vitae ipsum', 'OdoF7WRGLaR', 45, 45),
- (46, '2022-07-04', '780.92', 55, '216.22', 'urna pretium nisl ut volutpat', 'W3xzfTEjz', 46, 46),
- (47, '2022-09-04', '687.51', 63, '180.17', 'dui maecenas tristique', 'ehCfIe8Udk', 47, 47),
- (48, '2022-05-21', '623.55', 56, '206.17', 'vel sem sed', 'g6sQeZ', 48, 48),
- (49, '2022-12-07', '969.16', 43, '200.32', 'non pretium quis lectus suspendisse', 'nZqgCBiclsx8', 49, 49),
- (50, '2022-02-21', '761.03', 62, '112.25', 'neque vestibulum eget vulputate', 'G9XdobMc', 50, 50),
- (51, '2022-06-16', '927.25', 29, '121.97', 'pharetra magna vestibulum aliquet ultrices', 'XRgtTudgay', 51, 51),
- (52, '2022-09-25', '856.61', 19, '287.32', 'eu est congue elementum in hac habitasse platea', 'YgnnbtLJ', 52, 52),
- (53, '2022-06-18', '887.56', 63, '114.86', 'mi sit amet lobortis', 'bKxBhg', 53, 53),
- (54, '2022-03-03', '838.70', 20, '246.65', 'aliquam convallis nunc proin', 'L6VzFf', 54, 54),
- (55, '2022-10-18', '310.79', 44, '292.54', 'enim in tempor turpis nec', 'fv9NPeKo93X', 55, 55),
- (56, '2022-04-30', '571.13', 48, '386.87', 'sed justo pellentesque', 'sncMMOlaOsdz', 56, 56),
- (57, '2022-11-18', '627.13', 56, '359.78', 'eget elit sodales scelerisque mauris sit amet eros', '4X4exdSz4r', 57, 57),
- (58, '2022-02-18', '682.27', 40, '269.21', 'cubilia curae donec pharetra magna vestibulum aliquet', 'HCq5NRJ', 58, 58),
- (59, '2022-05-05', '635.82', 33, '133.24', 'potenti nullam porttitor lacus at turpis donec posuere', '9nylewhxQRb3', 59, 59),
- (60, '2022-10-12', '499.29', 61, '258.68', 'vel enim sit amet nunc viverra dapibus nulla', 'GLuILEHQOu', 60, 60),
- (61, '2022-04-17', '540.55', 36, '199.68', 'habitasse platea dictumst morbi vestibulum', 'hwjq4H6AT5DG', 61, 61),
- (62, '2023-01-31', '451.35', 32, '274.29', 'dui vel sem sed sagittis', 'VSzRzbRMHLP', 62, 62),
- (63, '2022-06-16', '484.48', 25, '336.97', 'odio justo sollicitudin ut suscipit a feugiat et', 'sJyhmi', 63, 63),
- (64, '2023-01-07', '601.27', 13, '168.61', 'in felis eu sapien cursus vestibulum', 'HlinpDhP', 64, 64),
- (65, '2022-08-15', '609.47', 67, '199.65', 'consequat in consequat', 't8ADAY9CWbV6', 65, 65),
- (66, '2022-08-12', '460.40', 49, '255.66', 'est donec odio', 'pxXJLH3', 66, 66),
- (67, '2022-06-26', '899.05', 43, '339.72', 'libero rutrum ac lobortis vel dapibus at', '8FSi5sRc8e', 67, 67),
- (68, '2022-09-21', '251.73', 42, '118.08', 'at turpis donec posuere', '1d9ONziat0Ln', 68, 68),
- (69, '2022-11-30', '798.57', 39, '196.56', 'cras pellentesque volutpat dui maecenas tristique est et', 'O3YgXEYx5Z', 69, 69),
- (70, '2022-08-18', '772.15', 69, '106.23', 'id turpis integer aliquet massa id lobortis', 'r5E7BanhAp2', 70, 70),
- (71, '2022-05-21', '464.51', 26, '233.57', 'vel augue vestibulum ante ipsum primis in', 'VkmmT2', 71, 71),
- (72, '2022-05-05', '588.89', 42, '347.19', 'id nisl venenatis lacinia', 'qhIZDvLbwDcY', 72, 72),
- (73, '2022-04-14', '802.91', 43, '391.02', 'quisque id justo sit amet sapien dignissim', 'm1uQQtf', 73, 73),
- (74, '2022-11-11', '592.50', 38, '252.22', 'duis bibendum felis sed interdum venenatis', 'qAqecRXpK', 74, 74),
- (75, '2022-05-08', '969.35', 51, '272.24', 'dis parturient montes nascetur', '0kq1UAB', 75, 75),
- (76, '2022-07-13', '539.45', 36, '165.50', 'duis mattis egestas metus aenean fermentum donec ut', 'wQPlx3nNGkX', 76, 76),
- (77, '2023-01-12', '650.40', 61, '265.93', 'vitae mattis nibh', 'hQ5nX40ea', 77, 77),
- (78, '2022-08-31', '959.44', 39, '390.74', 'vivamus tortor duis mattis egestas metus aenean fermentum', 'vtWZ3YTZCgUU', 78, 78),
- (79, '2022-11-04', '875.92', 13, '148.77', 'integer tincidunt ante vel ipsum praesent', 'Cuvi4pDB5Z2U', 79, 79),
- (80, '2022-05-18', '870.95', 13, '332.36', 'donec posuere metus', 'd6IWyVUb', 80, 80),
- (81, '2023-01-12', '813.36', 15, '287.07', 'sit amet turpis elementum ligula', '8oUH48', 81, 81),
- (82, '2022-03-26', '765.67', 10, '275.03', 'cum sociis natoque penatibus', 'T3vlKY', 82, 82),
- (83, '2022-12-04', '749.25', 61, '262.17', 'sed ante vivamus tortor duis mattis egestas metus', 'aIDwdX7R', 83, 83),
- (84, '2022-12-17', '673.14', 47, '389.34', 'dictumst aliquam augue quam sollicitudin', 'e70rPkKix7iw', 84, 84),
- (85, '2023-01-10', '669.58', 47, '363.96', 'in leo maecenas pulvinar lobortis est phasellus', 'oJjnkx', 85, 85),
- (86, '2022-03-02', '369.20', 34, '319.04', 'fusce consequat nulla nisl', 'YN9ODud', 86, 86),
- (87, '2022-04-18', '254.17', 17, '302.30', 'ultrices posuere cubilia curae duis faucibus', 'DDR1z5DjS3', 87, 87),
- (88, '2022-03-11', '935.25', 37, '210.45', 'vestibulum sed magna at nunc commodo placerat praesent', '6gDdBDqgJ', 88, 88),
- (89, '2022-06-27', '432.94', 47, '326.71', 'donec pharetra magna vestibulum aliquet ultrices erat', 'EVZ9kGZYyAb', 89, 89),
- (90, '2022-07-02', '416.12', 43, '191.93', 'odio donec vitae nisi nam', 'KoOK0UkS3ABJ', 90, 90),
- (91, '2022-10-21', '895.60', 74, '384.38', 'sit amet lobortis sapien sapien non mi integer', 'zlR18THM8', 91, 91),
- (92, '2022-09-28', '921.61', 36, '210.01', 'odio cras mi pede malesuada in', 'l057h4', 92, 92),
- (93, '2022-05-03', '630.78', 41, '210.01', 'nisi volutpat eleifend donec ut dolor', 'nrf42EC', 93, 93),
- (94, '2022-06-18', '750.50', 14, '255.02', 'in ante vestibulum ante ipsum primis in', 'TzmwcGrzgs', 94, 94),
- (95, '2022-07-01', '436.43', 54, '369.02', 'tellus in sagittis dui', 'PUwFcM', 95, 95),
- (96, '2022-11-30', '943.34', 25, '165.34', 'donec semper sapien a libero nam dui', 'J71QBRtv', 96, 96),
- (97, '2022-11-05', '316.51', 73, '301.93', 'tincidunt eget tempus vel', 'DHrPAaA1', 97, 97),
- (98, '2022-02-23', '863.96', 53, '331.22', 'dui vel sem sed sagittis', 'OgWvYx2yp', 98, 98),
- (99, '2022-03-19', '948.95', 35, '205.47', 'dui proin leo odio', 'MRU8S8hUK', 99, 99),
- (100, '2022-08-05', '889.18', 42, '248.98', 'quam nec dui', 'bhajb8O', 100, 100);
+insert into coupon (coupon_id, percentage_discount, coupon_code, admin_id) values 
+ (1, 23, 'vsGzoRI0w',1),
+ (2, 21, 'N8Yr78', 2),
+ (3, 48, 'QOoIW6Ebt', 3),
+ (4, 71, 'fuEPbl0OSOP',4),
+ (5, 16, 'dT7a6y6Gozh', 5),
+ (6, 37, 'RhjeHhc5i', 6),
+ (7, 59, 'aEXdbz060', 7),
+ (8, 53, 'wqeMJJE9ZWBK',8),
+ (9, 40, 'N6b3tTZ5', 9),
+ (10, 38, 'BAdPBiD6Ne', 10),
+ (11, 27, 'dtd3d5', 11),
+ (12, 26, 'e2EWt3',12),
+ (13, 10, 'yY90ZxLSVxAn', 13),
+ (14, 63, 'ryk1QQnP66Y', 14),
+ (15, 45, 'PEnNG21Pms', 15),
+ (16, 26, 'u36vJnI', 16),
+ (17, 36, '4VUB4O3W8M', 17),
+ (18, 43,'wVbt2c', 18),
+ (19, 32, 'rIeTMhqpi5T4' , 19),
+ (20, 42,'bhajb8O', 100);
  
 create table cart (
 	cart_id INT NOT NULL UNIQUE,
     FOREIGN KEY (cart_id) REFERENCES customer (customer_id)
     ON DELETE CASCADE,
 	total_cost DECIMAL(10, 2) NOT NULL,
-    coupon_id INT,
-    FOREIGN KEY (coupon_id) REFERENCES coupon (coupon_id),
 	description_info TEXT NOT NULL
 );
 
-insert into cart (cart_id, total_cost, coupon_id, description_info) values 
- (1, 66538.88, 1, 'augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl'),
- (2, '10390.19', 2, 'odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla'),
- (3, '90687.03', null, 'ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel'),
- (4, '16309.71', null, 'magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum'),
- (5, '47002.89', null, 'vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi'),
- (6, '90089.11', 6, 'pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit'),
- (7, '19218.51', null, 'rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend'),
- (8, '89395.01', 8, 'nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet'),
- (9, '72247.19', null, 'aliquam convallis nunc proin at turpis a pede posuere nonummy integer non'),
- (10, '69608.24', null, 'quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis'),
- (11, '84901.11', 11, 'tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam nam'),
- (12, '80351.31', null, 'consequat dui nec nisi volutpat eleifend donec ut dolor morbi vel'),
- (13, '2678.74', 13, 'in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla'),
- (14, '60627.21', 14, 'platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante nulla'),
- (15, '82327.65', 15, 'amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi'),
- (16, '26553.33', 16, 'vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna'),
- (17, '47246.13', 17, 'ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae duis'),
- (18, '2433.89', 18, 'ligula vehicula consequat morbi a ipsum integer a nibh in'),
- (19, '20644.67', 19, 'facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus'),
- (20, '78857.29', 20, 'morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla'),
- (21, '18494.64', 21, 'sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi sem mauris'),
- (22, '53762.54', null, 'adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci'),
- (23, '79788.20', 23, 'viverra diam vitae quam suspendisse potenti nullam porttitor lacus at'),
- (24, '7148.01', 24, 'et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis'),
- (25, '663.22', 25, 'justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est'),
- (26, '46094.94', 26, 'eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in'),
- (27, '93382.00', 27, 'quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla'),
- (28, '90327.87', 28, 'ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at'),
- (29, '47852.91', 29, 'dolor sit amet consectetuer adipiscing elit proin risus praesent lectus vestibulum quam sapien varius ut blandit non interdum in ante'),
- (30, '59987.46', null, 'mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient'),
- (31, '56379.02', null, 'nisl aenean lectus pellentesque eget nunc donec quis orci eget'),
- (32, '85056.35', 32, 'eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit'),
- (33, '70549.48', 33, 'nibh fusce lacus purus aliquet at feugiat non pretium quis'),
- (34, '71931.69', 34, 'varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit'),
- (35, '85446.32', 35, 'vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id'),
- (36, '35248.95', 36, 'nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in'),
- (37, '21432.90', 37, 'dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac'),
- (38, '98963.89', 38, 'mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec'),
- (39, '75881.27', 39, 'non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget eros elementum pellentesque quisque porta'),
- (40, '43445.30', null, 'volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in'),
- (41, '4322.44', null, 'mi nulla ac enim in tempor turpis nec euismod scelerisque quam'),
- (42, '79504.44', 42, 'eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a'),
- (43, '88725.03', 43, 'faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi'),
- (44, '48499.52', 44, 'pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo'),
- (45, '4070.90', 45, 'montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent'),
- (46, '38303.29', 46, 'adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede'),
- (47, '35930.89', null, 'vestibulum ante ipsum primis in faucibus orci luctus et ultrices'),
- (48, '9640.12', null, 'vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient'),
- (49, '43861.77', null, 'a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante'),
- (50, '42705.74', null, 'consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam'),
- (51, '82712.03', null, 'sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum'),
- (52, '62306.77', null, 'nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus'),
- (53, '56395.96', 53, 'luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet'),
- (54, '35638.50', 54, 'phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing'),
- (55, '12836.79', 55, 'amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus'),
- (56, '42738.10', 56, 'tincidunt lacus at velit vivamus vel nulla eget eros elementum pellentesque'),
- (57, '9738.52', null, 'viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non'),
- (58, '9103.41', null, 'libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum'),
- (59, '1182.76', null, 'purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst'),
- (60, '62291.30', null, 'posuere cubilia curae nulla dapibus dolor vel est donec odio'),
- (61, '95464.90', 61, 'fusce congue diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat'),
- (62, '25723.72', null, 'dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia'),
- (63, '18200.39', 63, 'adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien'),
- (64, '16705.96', 64, 'morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante nulla justo aliquam quis'),
- (65, '6731.10', 65, 'nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc'),
- (66, '62232.36', 66, 'quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat'),
- (67, '56015.57', null, 'integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis'),
- (68, '95675.10', null, 'tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate'),
- (69, '71583.94', 69, 'donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit'),
- (70, '38065.40', null, 'ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae'),
- (71, '24858.57', 71, 'sapien a libero nam dui proin leo odio porttitor id consequat'),
- (72, '75814.90', 72, 'nulla elit ac nulla sed vel enim sit amet nunc viverra'),
- (73, '28439.10', 73, 'in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam'),
- (74, '1776.30', 74, 'metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu'),
- (75, '25999.36', null, 'massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien'),
- (76, '18349.37', null, 'suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper'),
- (77, '45079.16', 77, 'ut at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio'),
- (78, '13190.84', null, 'nisi eu orci mauris lacinia sapien quis libero nullam sit amet'),
- (79, '43776.91', 79, 'luctus ultricies eu nibh quisque id justo sit amet sapien dignissim'),
- (80, '8497.31', null, 'interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam nam tristique'),
- (81, '97496.46', 81, 'bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu'),
- (82, '86646.57', null, 'amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum'),
- (83, '98394.66', 83, 'at nulla suspendisse potenti cras in purus eu magna vulputate luctus'),
- (84, '42065.73', 84, 'odio condimentum id luctus nec molestie sed justo pellentesque viverra'),
- (85, '84237.01', null, 'tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus'),
- (86, '38131.47', 86, 'gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada'),
- (87, '70128.81', 87, 'quisque erat eros viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec'),
- (88, '44285.78', 88, 'quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus'),
- (89, '72912.98', 89, 'eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae'),
- (90, '19066.24', 90, 'justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et'),
- (91, '38846.71', 91, 'platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante'),
- (92, '21894.60', 92, 'placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus'),
- (93, '99745.36', 93, 'in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in'),
- (94, '56685.93', null, 'risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl'),
- (95, '74285.22', null, 'fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in'),
- (96, '26160.87', 96, 'mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla'),
- (97, '71302.14', 97, 'tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet'),
- (98, '36372.57', null, 'sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam'),
- (99, '71472.53', 99, 'volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus'),
- (100, '8638.15', 100, 'nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla');
+insert into cart (cart_id, total_cost, description_info) values 
+ (1, 0,  'augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl'),
+ (2, 0,  'odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla'),
+ (3, 0, 'ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel'),
+ (4, 0, 'magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum'),
+ (5, 0, 'vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi'),
+ (6, 0, 'pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit'),
+ (7, 0, 'rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend'),
+ (8, 0, 'nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet'),
+ (9, 0, 'aliquam convallis nunc proin at turpis a pede posuere nonummy integer non'),
+ (10, 0, 'quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis'),
+ (11, 0, 'tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam nam'),
+ (12, 0, 'consequat dui nec nisi volutpat eleifend donec ut dolor morbi vel'),
+ (13, 0, 'in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla'),
+ (14, 0, 'platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante nulla'),
+ (15, 0, 'amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi'),
+ (16, 0, 'vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna'),
+ (17, 0, 'ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae duis'),
+ (18, 0, 'ligula vehicula consequat morbi a ipsum integer a nibh in'),
+ (19, 0, 'facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus'),
+ (20, 0, 'morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla'),
+ (21, 0, 'sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi sem mauris'),
+ (22, 0, 'adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci'),
+ (23, 0, 'viverra diam vitae quam suspendisse potenti nullam porttitor lacus at'),
+ (24, 0, 'et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis'),
+ (25, 0, 'justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est'),
+ (26, 0, 'eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in'),
+ (27, 0, 'quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla'),
+ (28, 0, 'ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at'),
+ (29, 0, 'dolor sit amet consectetuer adipiscing elit proin risus praesent lectus vestibulum quam sapien varius ut blandit non interdum in ante'),
+ (30, 0, 'mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient'),
+ (31, 0, 'nisl aenean lectus pellentesque eget nunc donec quis orci eget'),
+ (32, 0, 'eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit'),
+ (33, 0, 'nibh fusce lacus purus aliquet at feugiat non pretium quis'),
+ (34, 0, 'varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit'),
+ (35, 0, 'vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id'),
+ (36, 0, 'nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in'),
+ (37, 0, 'dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac'),
+ (38, 0, 'mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec'),
+ (39, 0, 'non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget eros elementum pellentesque quisque porta'),
+ (40, 0, 'volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in'),
+ (41, 0, 'mi nulla ac enim in tempor turpis nec euismod scelerisque quam'),
+ (42, 0, 'eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a'),
+ (43, 0, 'faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi'),
+ (44, 0, 'pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo'),
+ (45, 0, 'montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent'),
+ (46, 0, 'adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede'),
+ (47, 0, 'vestibulum ante ipsum primis in faucibus orci luctus et ultrices'),
+ (48, 0, 'vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient'),
+ (49, 0, 'a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante'),
+ (50, 0, 'consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam'),
+ (51, 0, 'sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum'),
+ (52, 0, 'nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus'),
+ (53, 0, 'luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet'),
+ (54, 0, 'phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing'),
+ (55, 0, 'amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus'),
+ (56, 0, 'tincidunt lacus at velit vivamus vel nulla eget eros elementum pellentesque'),
+ (57, 0, 'viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non'),
+ (58, 0, 'libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum'),
+ (59, 0, 'purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst'),
+ (60, 0, 'posuere cubilia curae nulla dapibus dolor vel est donec odio'),
+ (61, 0, 'fusce congue diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat'),
+ (62, 0, 'dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia'),
+ (63, 0, 'adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien'),
+ (64, 0, 'morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante nulla justo aliquam quis'),
+ (65, 0, 'nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc'),
+ (66, 0, 'quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat'),
+ (67, 0, 'integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis'),
+ (68, 0, 'tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate'),
+ (69, 0, 'donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit'),
+ (70, 0, 'ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae'),
+ (71, 0, 'sapien a libero nam dui proin leo odio porttitor id consequat'),
+ (72, 0, 'nulla elit ac nulla sed vel enim sit amet nunc viverra'),
+ (73, 0, 'in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam'),
+ (74, 0, 'metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu'),
+ (75, 0, 'massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien'),
+ (76, 0, 'suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper'),
+ (77, 0, 'ut at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio'),
+ (78, 0, 'nisi eu orci mauris lacinia sapien quis libero nullam sit amet'),
+ (79, 0, 'luctus ultricies eu nibh quisque id justo sit amet sapien dignissim'),
+ (80, 0, 'interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam nam tristique'),
+ (81, 0, 'bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu'),
+ (82, 0, 'amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum'),
+ (83, 0, 'at nulla suspendisse potenti cras in purus eu magna vulputate luctus'),
+ (84, 0, 'odio condimentum id luctus nec molestie sed justo pellentesque viverra'),
+ (85, 0, 'tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus'),
+ (86, 0, 'gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada'),
+ (87, 0, 'quisque erat eros viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec'),
+ (88, 0, 'quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus'),
+ (89, 0, 'eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae'),
+ (90, 0, 'justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et'),
+ (91, 0, 'platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante'),
+ (92, 0, 'placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus'),
+ (93, 0, 'in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in'),
+ (94, 0, 'risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl'),
+ (95, 0, 'fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in'),
+ (96, 0, 'mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla'),
+ (97, 0, 'tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet'),
+ (98, 0, 'sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam'),
+ (99, 0, 'volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus'),
+ (100, 0, 'nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla');
  
  create table orders (
 	order_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -1157,6 +1083,7 @@ create table bill (
 	order_summary TEXT NOT NULL,
 	mode_of_payment VARCHAR(11)
 );
+
 insert into bill (bill_id, order_summary, mode_of_payment) values 
  (1, 'nulla ut erat id mauris vulputate', 'credit card'),
  (2, 'tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit', 'neft'),
@@ -1402,7 +1329,6 @@ insert into categ_prod (prod_id,categ_id) values
 (17,17),
 (18,18),
 (19,19),
-(20,20),
 (21,21),
 (22,22),
 (23,23),
@@ -1714,6 +1640,31 @@ create table cart_prod (
     ON DELETE CASCADE
 );
 
+delimiter //
+CREATE TRIGGER update_cart_total
+AFTER INSERT ON cart_prod
+FOR EACH ROW
+BEGIN
+  UPDATE cart
+  SET total_cost = total_cost + (SELECT product.product_cost * NEW.quantity FROM product WHERE product.product_id = NEW.prod_id)
+  WHERE cart_id = NEW.cart_id;
+END;//
+delimiter ;
+
+delimiter //
+CREATE TRIGGER cart_prod_quantity_check_insert_trigger
+BEFORE INSERT ON cart_prod
+FOR EACH ROW
+BEGIN
+    DECLARE product_qty INT;
+    SELECT Quantity INTO product_qty FROM product WHERE product.product_id = NEW.prod_id;
+    IF NEW.quantity > product_qty THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Cannot add product to cart: Quantity requested exceeds available stock';
+    END IF;
+END;//
+delimiter ;
+
 insert into cart_prod (prod_id,cart_id,quantity) values 
 (99,39,8),
 (64,31,4),
@@ -1805,131 +1756,41 @@ insert into cart_prod (prod_id,cart_id,quantity) values
 (83,39,7),
 (100,71,3),
 (14,94,7),
-(59,77,5),
-(27,63,8),
-(20,52,5),
-(92,69,7),
-(3,69,8),
-(64,3,6),
+(59,77,1),
+(27,63,1),
+(20,52,1),
+(92,69,1),
+(3,69,1),
+(64,3,1),
 (37,76,1),
-(97,7,5),
-(90,77,4),
-(94,17,4);
+(97,7,1),
+(90,77,1),
+(94,17,1);
 
-create table order_prod (
-	prod_id INT,
-    order_id INT,
-    quantity INT NOT NULL,
-	CONSTRAINT order_prod PRIMARY KEY (prod_id, order_id),
-	CONSTRAINT OK_prod
-	FOREIGN KEY (prod_id) REFERENCES product (product_id)
+create table cart_coupon (
+	coupon_id INT,
+    cart_id INT,
+	CONSTRAINT cart_coupon PRIMARY KEY (coupon_id, cart_id),
+	CONSTRAINT CPK_coupon
+	FOREIGN KEY (coupon_id) REFERENCES coupon (coupon_id)
     ON DELETE CASCADE,
-	CONSTRAINT OK_deal
-	FOREIGN KEY (order_id) REFERENCES orders (order_id)
+	CONSTRAINT CPK_carton
+	FOREIGN KEY (cart_id) REFERENCES cart (cart_id)
     ON DELETE CASCADE
 );
 
-insert into order_prod (prod_id,order_id,quantity) values
-(1,1,6),
-(2,2,6),
-(3,3,7),
-(4,4,3),
-(5,5,4),
-(6,6,3),
-(7,7,8),
-(8,8,3),
-(9,9,8),
-(10,10,5),
-(11,11,2),
-(12,12,6),
-(13,13,3),
-(14,14,5),
-(15,15,6),
-(16,16,1),
-(17,17,5),
-(18,18,3),
-(19,19,1),
-(20,20,6),
-(21,21,3),
-(22,22,7),
-(23,23,5),
-(24,24,5),
-(25,25,6),
-(26,26,6),
-(27,27,6),
-(28,28,2),
-(29,29,7),
-(30,30,7),
-(31,31,4),
-(32,32,8),
-(33,33,1),
-(34,34,7),
-(35,35,3),
-(36,36,8),
-(37,37,2),
-(38,38,1),
-(39,39,2),
-(40,40,6),
-(41,41,4),
-(42,42,6),
-(43,43,3),
-(44,44,3),
-(45,45,1),
-(46,46,3),
-(47,47,1),
-(48,48,4),
-(49,49,6),
-(50,50,8),
-(51,51,2),
-(52,52,8),
-(53,53,2),
-(54,54,5),
-(55,55,6),
-(56,56,3),
-(57,57,1),
-(58,58,6),
-(59,59,2),
-(60,60,6),
-(61,61,5),
-(62,62,2),
-(63,63,1),
-(64,64,6),
-(65,65,2),
-(66,66,8),
-(67,67,6),
-(68,68,4),
-(69,69,5),
-(70,70,6),
-(71,71,6),
-(72,72,7),
-(73,73,8),
-(74,74,1),
-(75,75,6),
-(76,76,8),
-(77,77,5),
-(78,78,7),
-(79,79,2),
-(80,80,8),
-(81,81,2),
-(82,82,3),
-(83,83,7),
-(84,84,6),
-(85,85,3),
-(86,86,4),
-(87,87,5),
-(88,88,4),
-(89,89,8),
-(90,90,4),
-(91,91,5),
-(92,92,4),
-(93,93,6),
-(94,94,1),
-(95,95,7),
-(96,96,5),
-(97,97,1),
-(98,98,7),
-(99,99,1),
-(100,100,4);
+insert into cart_coupon (coupon_id, cart_id) values 
+(1,1),
+(2,1),
+(3,1),
+(4,1),
+(5,1),
+(6,1),
+(7,1),
+(8,1),
+(9,1),
+(10,1);
+
 
 CREATE INDEX ix_custID ON customer (customer_id);
 CREATE INDEX ix_adminID ON admins (admin_id);
@@ -1943,7 +1804,6 @@ CREATE INDEX ix_cartID ON cart (cart_id);
 CREATE INDEX ix_orderID ON orders (order_id);
 CREATE INDEX ix_billID ON bill (bill_id);
 CREATE INDEX ix_trackingID ON tracking_details (track_id);
-CREATE INDEX ix_orderprodID ON order_prod (prod_id, order_id);
 CREATE INDEX ix_categprodID ON categ_prod (prod_id, categ_id);
 CREATE INDEX ix_cartprodID ON cart_prod (prod_id, cart_id);
 CREATE INDEX ix_dealprodID ON deal_prod (prod_id, deal_id);
@@ -1955,46 +1815,9 @@ ALTER TABLE dealer ADD CONSTRAINT check_email_address_deal CHECK (email_id LIKE 
 ALTER TABLE delivery_boy ADD CONSTRAINT check_email_address_deliver CHECK (email_id LIKE '%@%.%');
 ALTER TABLE product ADD CONSTRAINT check_cost_prod CHECK (product_cost > 0);
 ALTER TABLE cart_prod ADD CONSTRAINT check_quant1 CHECK (quantity > 0);
-ALTER TABLE order_prod ADD CONSTRAINT check_quant2 CHECK (quantity > 0);
 ALTER TABLE product ADD CONSTRAINT check_quant_prod CHECK (quantity >= 0);
 ALTER TABLE tracking_details ADD CONSTRAINT check_del_status CHECK (delivery_status IN ('Not dispatched yet', 'delivered', 'dispatched','out for delivery','arrived'));
 ALTER TABLE bill ADD CONSTRAINT check_mode_of_payment CHECK (mode_of_payment IN ('neft', 'cash', 'upi','debit card','credit card'));
 ALTER TABLE orders ADD CONSTRAINT check_ord_status CHECK (order_status IN ('Not delivered', 'Delivered'));
 ALTER TABLE product_feedback ADD CONSTRAINT check_rating CHECK (rating_given >= 0 and rating_given <= 5);
 ALTER TABLE product_feedback ADD CONSTRAINT check_likes CHECK (likes >= 0);
-
-UPDATE customer
-SET customer.admin_id=45
-WHERE customer.customer_id = 1;
-
-delimiter //
-CREATE TRIGGER order_address_check_insert_trigger BEFORE INSERT ON dealer
-       FOR EACH ROW
-       BEGIN
-           IF NEW.address_of_operations = '' THEN
-               SET NEW.address_of_operations = 'Vidur Limited';
-           END IF;
-       END;//
-delimiter ;
-
-delimiter //
-CREATE TRIGGER cart_prod_quantity_check_insert_trigger
-BEFORE INSERT ON cart_prod
-FOR EACH ROW
-BEGIN
-    DECLARE product_qty INT;
-    SELECT Quantity INTO product_qty FROM product WHERE product.product_id = NEW.prod_id;
-    IF NEW.quantity > product_qty THEN
-        SIGNAL SQLSTATE '45000' 
-        SET MESSAGE_TEXT = 'Cannot add product to cart: Quantity requested exceeds available stock';
-    END IF;
-END;//
-delimiter ;
-
-insert into dealer (dealer_id, dealer_name, dealer_username, dealer_password, address_of_operations, contact_number, email_id, admin_id) values 
- (101, 'Worthyna Durram', 'Gregorri Hitzke', 'RlrrP9kFY8kJ', '', '334 909 6461', 'ghitzketi0@blog.com', 1);
-
-insert into cart_prod (prod_id,cart_id,quantity) values 
- (99,3,1000);
-
- 

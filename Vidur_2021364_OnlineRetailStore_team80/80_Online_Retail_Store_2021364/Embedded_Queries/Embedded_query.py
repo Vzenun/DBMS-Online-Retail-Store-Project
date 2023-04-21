@@ -24,9 +24,9 @@ try:
             SELECT c.customer_id, c.customer_name,o.order_id
             FROM Online_Retail_Store.customer as c
             LEFT JOIN Online_Retail_Store.orders as o ON c.customer_id = o.customer_id
-            WHERE o.total_cost>="""
+            WHERE o.total_cost>= """
             mySql_sql_select_Query=mySql_sql_select_Query+cost
-            mySql_sql_select_Query=mySql_sql_select_Query+"""ORDER BY c.customer_id """
+            mySql_sql_select_Query=mySql_sql_select_Query+""" ORDER BY c.customer_id """
 
 
             cursor.execute(mySql_sql_select_Query)
