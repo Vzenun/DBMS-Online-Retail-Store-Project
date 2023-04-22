@@ -337,21 +337,136 @@ try:
         print("4. View Categories")
         print("5. Assign category to a product")
         print("6. Add Customer")
-        print("7. Add Coupon")
-        print("8. Assign a coupon to a customer")
-        print("9. Add Dealer")
-        print("10. Add Delivery Boy")
-        print("11. Analyse Data")
-        print("12. Log out.")
+        print("7. View Customers")
+        print("8. Add Coupon")
+        print("9. View Coupons")
+        print("10. Assign a coupon to a customer")
+        print("11. Add Dealer")
+        print("12. Add Delivery Boy")
+        print("13. Analyse Data")
+        print("14. Log out.")
         ans=int(input("Enter the choice: "))
-        if(ans==12):
+        if(ans==14):
             admin()
-        elif(ans==11):
+
+        elif(ans==13):
             admin_data_analysis()
+
+        elif(ans==12):
+            name=input("Enter name: ")
+            usrname=input("Enter username: ")
+            pwd=input("Enter password: ")
+            contact_number=input("Enter phone number: ")
+            emid=input("Enter email-id: ")
+            my_query="""
+            insert into delivery_boy (delivery_boy_name, delivery_boy_username, delivery_boy_password, delivery_boy_average_rating, contact_number, email_id, admin_id) values 
+            ("""+name+""","""+usrname+""","""+pwd+""", 0,"""+contact_number+""","""+emid+""","""+str(id)+""");
+            """
+            cursor.execute(my_query)
+            print(f'{name} has been added succesfully.')
+            admin_query(id)
+
+        elif(ans==11):
+            name=input("Enter name: ")
+            usrname=input("Enter username: ")
+            pwd=input("Enter password: ")
+            address=input("Enter password: ")
+            contact_number=input("Enter phone number: ")
+            emid=input("Enter email-id: ")
+            my_query="""
+            insert into dealer (dealer_name, dealer_username, dealer_password, address_of_operations, contact_number, email_id, admin_id) values 
+            ("""+name+""","""+usrname+""","""+pwd+""","""+address+""","""+contact_number+""","""+emid+""","""+str(id)+""");
+            """
+            cursor.execute(my_query)
+            print(f'{name} has been added succesfully.')
+            admin_query(id)
+
         elif(ans==10):
-            
+            name=input("Enter coupon_id: ")
+            usrname=input("Enter customer_id: ")
+            my_query="""
+            insert into customer_coupon (coupon_id, customer_id) values
+            ("""+name+""","""+usrname+""");
+            """
+            cursor.execute(my_query)
+            print(f'Coupon has been assigned to the customer succesfully.')
+            admin_query(id)
+        
+        elif(ans==9):
+            my_query="""
+            SELECT * FROM Online_Retail_Store.coupon;
+            """
+            cursor.execute(my_query)
+            result=cursor.fetchall()
+            print(f'There are currently {len(result)} coupons present in the database.')
+            print("Coupon_id    Coupon_Code     Percentage_discount")
+            for row in result:
+                print(f'{row[0]}   {row[2]}   {row[1]}')
+            admin_query(id)
+
+        elif(ans==8):
+            name=input("Enter coupon_code: ")
+            usrname=input("Enter percentage_discount: ")
+            my_query="""
+            insert into coupon (percentage_discount, coupon_code, admin_id) values 
+            ("""+usrname+""","""+name+""","""+str(id)+""");
+            """
+            cursor.execute(my_query)
+            print(f'Coupon has been added succesfully.')
+            admin_query(id)
+        
+        elif(ans==7):
+            my_query="""
+            SELECT * FROM Online_Retail_Store.customer;
+            """
+            cursor.execute(my_query)
+            result=cursor.fetchall()
+            print(f'There are currently {len(result)} customers present in the database.')
+            print("Customer_id    Customer_name     Contact_number    Customer_username   Email_id   Customer_address")
+            for row in result:
+                print(f'{row[0]}   {row[1]}   {row[2]}   {row[3]}   {row[5]}   {row[6]}')
+            admin_query(id)
+
+        elif(ans==6):
+            name=input("Enter name: ")
+            usrname=input("Enter username: ")
+            pwd=input("Enter password: ")
+            address=input("Enter password: ")
+            contact_number=input("Enter phone number: ")
+            emid=input("Enter email-id: ")
+            my_query="""
+            insert into customer(customer_name, customer_username, customer_password,customer_address, contact_number, email_id, admin_id) values 
+            ("""+name+""","""+usrname+""","""+pwd+""","""+address+""","""+contact_number+""","""+emid+""","""+str(id)+""");
+            """
+            cursor.execute(my_query)
+            print(f'{name} has been added succesfully.')
+            admin_query(id)
+        
+        elif(ans==5):
+            name=input("Enter category_id: ")
+            usrname=input("Enter product_id: ")
+            my_query="""
+            insert into categ_prod (prod_id,categ_id) values 
+            ("""+usrname+""","""+name+""");
+            """
+            cursor.execute(my_query)
+            print(f'Category has been assigned to the given product succesfully.')
+            admin_query(id)
+        
+        elif(ans==4):
+            my_query="""
+            SELECT * FROM Online_Retail_Store.category;
+            """
+            cursor.execute(my_query)
+            result=cursor.fetchall()
+            print(f'There are currently {len(result)} categories present in the database.')
+            print("Category_id    Category_name     Category_info")
+            for row in result:
+                print(f'{row[0]}   {row[1]}   {row[2]}')
+            admin_query(id)
 
     def admin_data_analysis():
+
         print("1. Displaying customer id,customer name,order id of the customers who have placed order having total cost>= the given cost")
         print("2. Displaying delivery boy id,date at which order placed,order status,delivery boy name,average rating of the delivery boy in all those orders in which toal cost>= the given cost")
         print("3. Displaying number of products sold by each brand for a given year.")
@@ -535,7 +650,7 @@ try:
             print("Query_6_activated_successfully")
         ask=input("Do you want to run another sql query or logout? (YES/NO) ")
         if(ask=="YES"):
-            start_query_admin()
+            admin_data_analysis()
         else:
             admin()
 
