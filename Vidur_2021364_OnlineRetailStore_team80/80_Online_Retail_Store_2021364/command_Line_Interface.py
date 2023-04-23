@@ -19,6 +19,7 @@ try:
         print("5. Exit the Application")
 
         ans=int(input("Enter the choice: "))
+        print()
         if(ans==1):
             admin()
         elif(ans==2):
@@ -112,18 +113,18 @@ try:
             SELECT product.product_id,Quantity,product.product_cost
             FROM product
             WHERE product.product_name = '"""+pr_name+"';"
-            print(mySql_sql_select_Query)
+            #print(mySql_sql_select_Query)
             mySql_sql_select_Query2="""
             SELECT prod_id,cart_id,quantity FROM Online_Retail_Store.cart_prod;
             """
-            print(mySql_sql_select_Query2)
+            #print(mySql_sql_select_Query2)
             cursor.execute(mySql_sql_select_Query)
             result = cursor.fetchall()
             #print(1)
             cursor.execute(mySql_sql_select_Query2)
             result2 = cursor.fetchall()
             #print(2)
-            print(len(result))
+            #print(len(result))
             if(len(result)==0):
                 print("Sorry, no such product name exists, try again with correct product name..")
                 customer_query(id)
@@ -157,7 +158,7 @@ try:
                         cursor.execute(my_query)
                         connection.commit()
                         print()
-                        print(f'Your cart has successfully been updated succesfully.')
+                        print(f'Your cart has been updated succesfully.')
                         print()
                     except:
                         connection.rollback()
@@ -167,50 +168,144 @@ try:
                 else:
                     print("Sorry, product you have requested is out of stock")
             else:
-                print(5)
+                #print(5)
                 if(int(result[0][1])>=quantity):
                     my_query2="""
                     SELECT total_cost FROM Online_Retail_Store.cart
                     WHERE cart_id="""+str(id)+";"
+                    
                     cursor.execute(my_query2)
                     answer=cursor.fetchall()
+
                     calcu=int(answer[0][0])-cost_of_product*qty+cost_of_product*quantity
+
                     my_query="""
                     UPDATE cart_prod
                     SET quantity="""+str(quantity)+"""
-                    WHERE cart_id="""+str(id)+""" and prod_id="""+result[0][0]+""";"""
-                    cursor.execute(my_query)
+                    WHERE cart_id="""+str(id)+""" and prod_id="""+str(result[0][0])+""";"""
+
+                    try:
+                        cursor.execute(my_query)
+                        connection.commit()
+                        print()
+                        print(f'Your quantity of product has been updated succesfully.')
+                        print()
+                    except:
+                        connection.rollback()
+                        print()
+                        print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                        print()
+                    
                     my_query="""
                     UPDATE cart
                     SET total_cost="""+str(calcu)+"""
                     WHERE cart_id="""+str(id)+""";"""
-                    cursor.execute(my_query)
-                    print("Your cart has successfully been updated")
+                    try:
+                        cursor.execute(my_query)
+                        connection.commit()
+                        print()
+                        print(f'Your cart has been updated succesfully.')
+                        print()
+                    except:
+                        connection.rollback()
+                        print()
+                        print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                        print()
+
                 else:
                     print("Sorry, product you have requested is out of stock")
+
             customer_query(id)
+
         elif(ans==5):
-            mySql_sql_select_Query ="""
-            DELETE FROM cart_prod
-            WHERE cart_prod.cart_id="""+str(id)+""";"""
-            cursor.execute(mySql_sql_select_Query)
-            my_query="""
-            UPDATE cart
-            SET total_cost=0
-            WHERE cart_id="""+str(id)+""";"""
-            cursor.execute(my_query)
-            print("Your cart has been emptied successfully")
+            empty_cart(id)
+
         elif(ans==4):
             mySql_sql_select_Query ="""
-            DELETE FROM cart_prod
-            WHERE cart_prod.cart_id="""+str(id)+""";"""
+            SELECT coupon.coupon_code,coupon.percentage_discount
+            FROM coupon
+            INNER JOIN customer_coupon ON coupon.coupon_id = customer_coupon.coupon_id
+            WHERE customer_coupon.customer_id = """+str(id)+""";"""
             cursor.execute(mySql_sql_select_Query)
-            my_query="""
-            UPDATE cart
-            SET total_cost=0
-            WHERE cart_id="""+str(id)+""";"""
-            cursor.execute(my_query)
-            print("Your cart has been emptied successfully")
+            result=cursor.fetchall()
+            print(f'There are currently {len(result)} coupons allocated to you.')
+            print("Coupon_Code     Percentage_discount")
+            for row in result:
+                print(f'{row[0]}   {row[1]}')
+            customer_query(id)
+
+        elif(ans==6):
+            my_query2="""
+            SELECT total_cost FROM Online_Retail_Store.cart
+            WHERE cart_id="""+str(id)+";"
+            cursor.execute(my_query2)
+            answer=cursor.fetchall()
+            if(int(answer[0][0])==0):
+                print("Sorry nothing to checkout your cart is alreaady empty.")
+            else:
+                cost=int(answer[0][0])
+                percent=0
+                asku=input("Do you want to apply the coupon code on the order(YES/NO):")
+                if(asku=='NO'):
+                    percent=0
+                else:
+                    coupon_code=input("Enter the coupon code:")
+                    mySql_sql_select_Query ="""
+                    SELECT coupon.percentage_discount,coupon.coupon_id
+                    FROM coupon
+                    INNER JOIN customer_coupon ON coupon.coupon_id = customer_coupon.coupon_id
+                    WHERE coupon.coupon_code= '"""+coupon_code+"""' and customer_coupon.customer_id = """+str(id)+""";"""
+                    cursor.execute(mySql_sql_select_Query)
+                    res=cursor.fetchall()
+                    if(len(res)==0):
+                        print("No such coupon code is available.")
+                    else:
+                        percent=int(res[0][0])
+                        cost=cost-cost*(percent)/100
+                        print("Coupon Applied Successfully")
+                        coupon_id=res[0][1]
+                        mySql_sql_select_Query="""
+                        DELETE FROM customer_coupon
+                        WHERE customer_coupon.customer_id="""+str(id)+""" and customer_coupon.coupon_id= """+str(coupon_id)+""";
+                        """
+                        try:
+                            cursor.execute(mySql_sql_select_Query)
+                            connection.commit()
+                            print()
+                            print("Coupon Applied Successfully")
+                            print()
+                        except:
+                            connection.rollback()
+                            print()
+                            print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                            print()
+                            customer_query(id)
+                date=input("Enter the date: ")
+                expected_date=input("Enter the date upto which you can expect delivery(make it atleast 7 days later than the date at which you placed the order): ")
+                address=input("Enter the delivery address: ")
+                order_status='Not delivered'
+                empty_cart(id)
+                my_query="""
+                insert into orders (delivery_boy_id, total_cost, delivery_address, order_status, order_placed_date, expected_delivery_time, customer_id) values 
+                (6, '"""+cost+"""', '"""+address+"""', '"""+order_status+"""', '"""+date+"""', '"""+expected_date+"""', '"""+str(id)+"""');
+                """
+                try:
+                    cursor.execute(my_query)
+                    connection.commit()
+                    my_query="""
+                    insert into tracking_details (track_id,contact_number, delivery_status, location) values
+                    (6, '169 977 4956', 'Not dispatched yet', 'Room 1517');
+                    """
+                    cursor.execute(my_query)
+                    connection.commit()
+                    print()
+                    print(f'Your order has been placed succesfully.')
+                    print()
+                except:
+                    connection.rollback()
+                    print()
+                    print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                    print()
         elif(ans==7):
             customer()
         else:
@@ -218,6 +313,38 @@ try:
             customer_query(id)
         return
     
+    def empty_cart(id):
+        if(True):
+            mySql_sql_select_Query ="""
+            DELETE FROM cart_prod
+            WHERE cart_prod.cart_id="""+str(id)+""";"""
+            try:
+                cursor.execute(mySql_sql_select_Query)
+                connection.commit()
+                print()
+                print(f'Your cart has been emptied succesfully.')
+                print()
+            except:
+                connection.rollback()
+                print()
+                print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                print()
+
+            my_query="""
+            UPDATE cart
+            SET total_cost=0
+            WHERE cart_id="""+str(id)+""";"""
+            try:
+                cursor.execute(my_query)
+                connection.commit()
+                print()
+                print(f'Your cart has been updated succesfully.')
+                print()
+            except:
+                connection.rollback()
+                print()
+                print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                print()
     def dealer():
         print("Enter the choice from given below: ")
         print("1. Login")
@@ -525,6 +652,7 @@ try:
             address=input("Enter address: ")
             contact_number=input("Enter phone number: ")
             emid=input("Enter email-id: ")
+
             my_query="""
             insert into customer(customer_name, customer_username, customer_password,customer_address, contact_number, email_id, admin_id) values 
             ('"""+name+"""','"""+usrname+"""','"""+pwd+"""','"""+address+"""','"""+contact_number+"""','"""+emid+"""','"""+str(id)+"""');
@@ -532,8 +660,10 @@ try:
             try:
                 cursor.execute(my_query)
                 connection.commit()
+
                 print()
                 print(f'Customer has been added succesfully.')
+
                 helper="""
                 SELECT customer_id FROM Online_Retail_Store.customer
                 WHERE customer_username= '"""+usrname+"""';"""
@@ -545,6 +675,7 @@ try:
                 ('"""
                 my_quer=my_quer+str(cart_id)
                 my_quer=my_quer+"""',0,'jvrenvjnvjnrvnkj vrnwvjn wrvjw vbntv tjb vjthjkv krj vj vfrv');"""
+
                 try:
                     cursor.execute(my_quer)
                     connection.commit()
@@ -758,6 +889,7 @@ try:
         elif(num==4):
             year=input("Enter the year:")
             month=input("Enter the month number:")
+
             mySql_sql_select_Query ="""
             SELECT p.product_name, COUNT(o.order_id) as total_orders, SUM(o.total_cost) as total_sales
             FROM orders o
@@ -824,6 +956,7 @@ try:
 
         elif(num==6):
             number=input("Enter the number: ")
+
             mySql_sql_select_Query ="""
             SELECT c.customer_name, c.email_id, SUM(total_cost) as total_order_value
             FROM orders o
