@@ -345,6 +345,69 @@ try:
                 print()
                 print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
                 print()
+    def empty_cart_with_checkout(id):
+        if(True):
+            mySql_sql_select_Query ="""
+            SELECT cart_prod.prod_id,cart_prod.quantity
+            FROM cart_prod
+            WHERE cart_prod.cart_id="""+str(id)+""";"""
+            cursor.execute(mySql_sql_select_Query)
+            result=cursor.fetchall()
+            flag=0
+            for row in result:
+                my_query=="""
+                SELECT product.Quantity
+                FROM cart_prod
+                WHERE product.product_id= """+str(row[0])+""";"""
+                cursor.execute(my_query)
+                armer=cursor.fetchall()
+                if(int(row[1])>int(armer[0][0])):
+                    flag=1
+            if(flag==1):
+                print("Sorry unable to checkout due to insufficient amount of product in inventory.")
+                customer_query(id)
+            mySql_sql_select_Query ="""
+            SELECT cart_prod.prod_id,cart_prod.quantity
+            FROM cart_prod
+            WHERE cart_prod.cart_id="""+str(id)+""";"""
+            cursor.execute(mySql_sql_select_Query)
+            result=cursor.fetchall()
+            for row in result:
+                my_query=="""
+                SELECT product.Quantity
+                FROM cart_prod
+                WHERE product.product_id= """+str(row[0])+""";"""
+                cursor.execute(my_query)
+                armer=cursor.fetchall()
+                my_query="""
+                UPDATE product
+                SET Quantity="""+str(int(armer[0][0])-int(row[1]))+"""
+                WHERE product_id="""+str(row[0])+""";"""
+                try:
+                    cursor.execute(my_query)
+                    connection.commit()
+                    print()
+                    print(f'Your cart has been updated succesfully.')
+                    print()
+                except:
+                    connection.rollback()
+                    print()
+                    print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                    print()
+            my_query="""
+            UPDATE cart
+            SET total_cost=0
+            WHERE cart_id="""+str(id)+""";"""
+            try:
+                cursor.execute(my_query)
+                connection.commit()
+                print()
+                print(f'Your cart has been updated succesfully.')
+                print()
+            except:
+                connection.rollback()
+                print()
+                print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
     def dealer():
         print("Enter the choice from given below: ")
         print("1. Login")
