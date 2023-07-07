@@ -1,0 +1,12 @@
+ALTER TABLE orders ADD CONSTRAINT check_cost CHECK (total_cost >= 0);
+ALTER TABLE cart ADD CONSTRAINT check_cart_cost CHECK (total_cost >= 0);
+ALTER TABLE customer ADD CONSTRAINT check_email_address CHECK (email_id LIKE '%@%.%');
+ALTER TABLE dealer ADD CONSTRAINT check_email_address_deal CHECK (email_id LIKE '%@%.%');
+ALTER TABLE delivery_boy ADD CONSTRAINT check_email_address_deliver CHECK (email_id LIKE '%@%.%');
+ALTER TABLE product ADD CONSTRAINT check_cost_prod CHECK (product_cost > 0);
+ALTER TABLE cart_prod ADD CONSTRAINT check_quant1 CHECK (quantity > 0);
+ALTER TABLE product ADD CONSTRAINT check_quant_prod CHECK (quantity >= 0);
+ALTER TABLE tracking_details ADD CONSTRAINT check_del_status CHECK (delivery_status IN ('Not dispatched yet', 'delivered', 'dispatched','out for delivery','arrived'));
+ALTER TABLE orders ADD CONSTRAINT check_ord_status CHECK (order_status IN ('Not delivered', 'Delivered'));
+ALTER TABLE product_feedback ADD CONSTRAINT check_rating CHECK (rating_given >= 0 and rating_given <= 5);
+ALTER TABLE product_feedback ADD CONSTRAINT check_likes CHECK (likes >= 0);

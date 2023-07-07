@@ -41,6 +41,7 @@ try:
         print("2. Go Back")
         num=int(input("Enter: "))
         if(num==1): 
+            print()
             print("Enter the credentials: ")
             usrname=input("Enter your username: ")
             pwd=input("Enter your password: ")
@@ -219,6 +220,7 @@ try:
 
         elif(ans==5):
             empty_cart(id)
+            customer_query(id)
 
         elif(ans==4):
             mySql_sql_select_Query ="""
@@ -284,18 +286,13 @@ try:
                 expected_date=input("Enter the date upto which you can expect delivery(make it atleast 7 days later than the date at which you placed the order): ")
                 address=input("Enter the delivery address: ")
                 order_status='Not delivered'
-                empty_cart(id)
+                empty_cart_with_checkout(id)
                 my_query="""
                 insert into orders (delivery_boy_id, total_cost, delivery_address, order_status, order_placed_date, expected_delivery_time, customer_id) values 
-                (6, '"""+cost+"""', '"""+address+"""', '"""+order_status+"""', '"""+date+"""', '"""+expected_date+"""', '"""+str(id)+"""');
+                (6, '"""+str(cost)+"""', '"""+str(address)+"""', '"""+str(order_status)+"""', '"""+str(date)+"""', '"""+str(expected_date)+"""', '"""+str(id)+"""');
                 """
+                print(2)
                 try:
-                    cursor.execute(my_query)
-                    connection.commit()
-                    my_query="""
-                    insert into tracking_details (track_id,contact_number, delivery_status, location) values
-                    (6, '169 977 4956', 'Not dispatched yet', 'Room 1517');
-                    """
                     cursor.execute(my_query)
                     connection.commit()
                     print()
@@ -306,6 +303,7 @@ try:
                     print()
                     print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
                     print()
+            customer_query(id)
         elif(ans==7):
             customer()
         else:
@@ -317,7 +315,7 @@ try:
         if(True):
             mySql_sql_select_Query ="""
             DELETE FROM cart_prod
-            WHERE cart_prod.cart_id="""+str(id)+""";"""
+            WHERE cart_prod.cart_id= """+str(id)+""";"""
             try:
                 cursor.execute(mySql_sql_select_Query)
                 connection.commit()
@@ -355,9 +353,9 @@ try:
             result=cursor.fetchall()
             flag=0
             for row in result:
-                my_query=="""
+                my_query="""
                 SELECT product.Quantity
-                FROM cart_prod
+                FROM product
                 WHERE product.product_id= """+str(row[0])+""";"""
                 cursor.execute(my_query)
                 armer=cursor.fetchall()
@@ -394,6 +392,20 @@ try:
                     print()
                     print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
                     print()
+            mySql_sql_select_Query ="""
+            DELETE FROM cart_prod
+            WHERE cart_prod.cart_id= """+str(id)+""";"""
+            try:
+                cursor.execute(mySql_sql_select_Query)
+                connection.commit()
+                print()
+                print(f'Your cart has been emptied succesfully.')
+                print()
+            except:
+                connection.rollback()
+                print()
+                print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                print()
             my_query="""
             UPDATE cart
             SET total_cost=0
@@ -414,6 +426,7 @@ try:
         print("2. Go Back")
         num=int(input("Enter: "))
         if(num==1): 
+            print()
             print("Enter the credentials: ")
             usrname=input("Enter your username: ")
             pwd=input("Enter your password: ")
@@ -424,7 +437,7 @@ try:
             result = cursor.fetchall()
             for row in result:
                 if(row[0]==usrname and row[1]==pwd):
-                    print(row[0],row[1])
+                    print(f'Welcome {row[0]}')
                     id=int(row[2])
                     dealer_query(id)
                     dealer()
@@ -443,25 +456,24 @@ try:
         ans=int(input("Enter the choice: "))
         if(ans==1):
             mySql_sql_select_Query ="""
-            SELECT customer.customer_name, orders.delivery_address
-            FROM orders
-            JOIN delivery_boy ON orders.delivery_boy_id = delivery_boy.delivery_boy_id
-            JOIN customer ON customer.customer_id = orders.customer_id
-            WHERE delivery_boy.delivery_boy_id = """+str(id)+";"
+            SELECT product.product_id,product.product_name
+            FROM product
+            JOIN deal_prod ON product.product_id = deal_prod.prod_id
+            WHERE deal_prod.deal_id = """+str(id)+";"
             cursor.execute(mySql_sql_select_Query)
             result = cursor.fetchall()
             print()
-            print(f'There are currently {len(result)} orders to be delivered')
-            print(f'Customer name   Delivery Address')
+            print(f'There are currently {len(result)} products sold by you')
+            print(f'Product_id    Product_name')
             for row in result:
                 print(row[0],row[1])
             print()
-            delivery_boy_query(id)
+            dealer_query(id)
         elif(ans==2):
-            delivery_boy()
+            dealer()
         else:
             print("Sorry, wrong input has been given try again...")
-            delivery_boy_query(id)
+            dealer_query(id)
         return
     
     def delivery_boy():
@@ -509,23 +521,24 @@ try:
             result = cursor.fetchall()
             print()
             print(f'There are currently {len(result)} orders to be delivered')
-            print(f'Customer name   Delivery Address')
+            print(f'Customer name   Order_id   Delivery Address')
             for row in result:
-                print(row[0],row[1])
+                print(row[0],row[1],row[2])
             print()
             delivery_boy_query(id)
+
         elif(ans==2):
-            ord_id=input("Enter the order id")
+            ord_id=input("Enter the order id: ")
             my_query="""
             UPDATE orders
             SET orders.order_status='Delivered'
-            WHERE orders.order_status='Not delivered' and oreders.delivery_boy_id= """+str(id)+""" and orders.order_id= """+str(ord_id)+""";
+            WHERE orders.order_status='Not delivered' and orders.delivery_boy_id= """+str(id)+""" and orders.order_id= """+str(ord_id)+""";
             """
             try:
                 cursor.execute(my_query)
                 connection.commit()
                 print()
-                print(f'order status has been updated succesfully.')
+                print(f'Order status has been updated succesfully.')
                 print()
                 delivery_boy_query(id)
             except:
@@ -547,6 +560,7 @@ try:
         print("2. Quit")
         num=int(input("Enter: "))
         if(num==1): 
+            print()
             print("Enter the credentials: ")
             usrname=input("Enter your username: ")
             pwd=input("Enter your password: ")
@@ -583,11 +597,33 @@ try:
         print("11. Add Dealer")
         print("12. Add Delivery Boy")
         print("13. Analyse Data")
-        print("14. Log out.")
+        print("14. Delete Product")
+        print("15. Log out.")
         ans=int(input("Enter the choice: "))
-
-        if(ans==14):
+        print()
+        if(ans==15):
             admin()
+
+        elif(ans==14):
+            name=input("Enter product_id: ")
+            my_query="""
+            DELETE FROM product
+            WHERE product.product_id= """+str(name)+""";
+            """
+            # print(my_query)
+            try:
+                cursor.execute(my_query)
+                connection.commit()
+                print()
+                print(f'Product has been deleted succesfully.')
+                print()
+                admin_query(id)
+            except:
+                connection.rollback()
+                print()
+                print(f'Sorry due to some error/wrong input information is not been able to be saved try again.')
+                print()
+                admin_query(id)
 
         elif(ans==13):
             admin_data_analysis(id)
